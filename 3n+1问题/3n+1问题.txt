@@ -1,0 +1,30 @@
+int main()
+{
+int num1=0;
+int num2=0;
+int sub=0;
+scanf("%d%d",&num1,&num2);
+sub=num2-num1;
+printf("sub=%d\n",sub);
+ return 0；
+} 
+
+  
+int main()
+{
+ int n=0;
+ int cnt=0; //cnt为计数器(count)的缩写
+ scanf("%d",&n); 
+ while(n!=1)  //!为逻辑反操作符，即非
+  {                 //则!=表示不等于≠
+   if(n%2==1)//%2表示除以2后取余数
+       //若余数为1则表示为奇数，若无余数则表示为偶数
+     n=(3*n+1)/2;
+   else
+     n=n/2;
+ cnt++;//cnt来计算程序运行了多少次
+       //   即被切成1需要多少次
+  }
+ printf("所需次数=%d\n",cnt);
+return 0;
+}
