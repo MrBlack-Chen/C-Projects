@@ -12,7 +12,7 @@ void game()//自创建游戏主体部分
 {
 int ret=0;  int input=0; int cnt=0;              
 ret=rand()%100+1; //引用rand()生成随机数函数,生成的随机数%100的余数为0～99,+1之后得到1～100之间的数
-while(1)//1为非0,表示真,while判断条件恒为真
+while(1)//1为非0,表示真,则while判断条件恒为真
  {
   printf("请猜数：>");
   scanf("%d",&input);
@@ -38,7 +38,7 @@ printf("猜测次数为：%d\n",cnt);
 int main()            
 {
 srand((unsigned int)time(NULL));//在引用rand()函数之前要先引用srand()设置生成随机数的起点
-int i=0;                                         //设置一次即可,故不要放在game()里面,防止生成的数不随机           
+int i=0;                        //设置一次即可,故不要放在game()里面,防止生成的数不随机           
 menu();//引用菜单函数
 do  //利用do…while()循环实现整个游戏的循环
 {
@@ -57,9 +57,9 @@ switch(i)
    break;
   }
 }
-while(i);  //while的判断条件为i的真假
-               //0为假,1(非0)为真,则当输入1时会进入do再次游戏
-              //当输入0时就不在进入do,结束了游戏
+while(i); //while的判断条件为i的真假
+          //0为假,1(非0)为真,则当输入1时会进入do再次游戏
+          //当输入0时就不再进入do,结束了游戏
 return 0;
 }            
   
