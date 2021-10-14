@@ -24,16 +24,15 @@ void initboard(char board[ROWS][COLS],int rows,int cols,char set)
 
 //创建设置雷的函数    
 void setboard(char board[ROWS][COLS],int row,int col)
-{//将雷设置在9*9的棋盘中,但👆🏻为了保持一致
- //(传过来的是ran数组11*11的),仍写成ROWS
- //可以在后面代码的实现中灵活处理应对
+{ //将雷设置在9*9的棋盘中,但上面为了保持一致(因为传过来的是ran数组11*11的),则仍写成ROWS
+  //可以在后面代码的实现中灵活处理应对
 int x=0;  int y=0;  int cnt=0;
  while(cnt<Easy)
-  {//雷是设置在9*9的棋盘中,但在11*11的棋盘
-//下标范围为1～9,则%模上row(余数为0～8)再+1
+  { //雷是设置在9*9的棋盘中,则在11*11的棋盘中将雷布置在下标1~9的区域中
+    //则将随机数%模上row/col(余数为0～8)再+1
    x=rand()% row +1;  y=rand()% col +1;
    if(board[x][y]=='0')
-    {    //用0代表没雷，用1代表雷
+    {    //用字符0代表没雷，用字符1代表雷
       board[x][y]='1';
       cnt++;
     }
@@ -45,19 +44,18 @@ void printboard(char board[ROWS][COLS],int row,int col)
 {
   int i=0;  int j=0;
   printf("标");
-  for(i=1;i<=row;i++)//打印列号
-  {               //在打印行之前
-    printf("%d ",i);//不管是什么类型
-  }       //输入法中 一个英文字母占一个字节
-                  //一个中文汉字占两个字节
+  for(i=1;i<=row;i++)//打印列号要在打印行之前
+  {               
+    printf("%d ",i);
+  }       
   printf("\n");
   for(i=1;i<=row;i++)
   {
     printf("%d ",i);//打印行号
     for(j=1;j<=col;j++)
     {
-     printf("%c ",board[i][j]);
-    }  //数组里的元素对应的就是一个字符
+     printf("%c ",board[i][j]);//数组里的元素对应的就是一个字符
+    }  
    printf("\n");
   }
 }
@@ -119,6 +117,7 @@ void develop(char ran[ROWS][COLS],char show[ROWS][COLS],int x,int y)
    }
  }
 }
+
 //创建判断扫雷成功的函数
 char Iswin(char show[ROWS][COLS],int row,int col)
 {
@@ -132,11 +131,11 @@ char Iswin(char show[ROWS][COLS],int row,int col)
      }
   }
    if(cnt>Easy)//通过计算剩下的'*'有多少
-   { //与Easy(20个雷都没有显示,为'*')比较
-     return 'C';//若cnt>20
-   } //则说明还有不是雷的,则返回'C',游戏继续
-   if(cnt==Easy)//若cnt=20
-   { //则说明剩下没点的都是雷,则扫雷成功
+   {           //与Easy(20个雷都没有显示,为'*')比较
+     return 'C';//若cnt>20,则说明还有不是雷的,则返回'C',游戏继续
+   } //
+   if(cnt==Easy)//若cnt=20,则说明剩下没点的都是雷,则扫雷成功
+   { 
     return 'W';
    }
 }
@@ -158,11 +157,10 @@ void findran(char ran[ROWS][COLS],char show[ROWS][COLS],int row,int col)
       printboard(ran,ROW,COL);
       break;    
      }
-     else    //不是雷,则要显示信息
-     {       //(即👇🏻计算周围有多少雷)
+     else    
+     {  //不是雷,则要显示信息(则getran（）计算周围有多少雷)
       int cnt=getran(ran,x,y);
-      show[x][y]=cnt+'0';
-//👆🏻cnt+'0'变成字符(因为show数组为字符数组)
+      show[x][y]=cnt+'0';//将cnt+'0'变成字符(因为show数组为字符数组)
       develop(ran,show,x,y);
       printboard(show,ROW,COL);
       ret=Iswin(show,ROW,COL);
@@ -193,9 +191,9 @@ void game()
  setboard(ran,ROW,COL);
  printboard(show,ROW,COL);
  findran(ran,show,ROW,COL);
-}//当两个都要用同一个函数初始化时
-//且初始化内容不同,可以将初始化内容作为实参传过去
-//讲他初始化设置为对应的形参即可
+}  //当两个都要用同一个函数初始化时且初始化内容不同时,可以将预期的初始化内容作为实参传过去
+   //将初始化内容用对应的形参接收即可
+
 void menu()//创建菜单函数
 {
  printf("***********扫雷************\n");
