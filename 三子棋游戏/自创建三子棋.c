@@ -1,7 +1,7 @@
 //自创建三子棋游戏
 #include<stdio.h>
-#define ROW 3 //#define定义的标识符常量
-#define COL 3 //本质就为常量
+#define ROW 3 //#define定义的标识符常量（本质就为常量）
+#define COL 3 
 #include<stdlib.h>
 #include<time.h>
 
@@ -11,6 +11,7 @@ void menu()//创建菜单函数
  printf("**1.开始游戏   0.退出游戏**\n");
  printf("***************************\n");
 }
+
 //创建数组初始化函数
 void Initboard(char board[ROW][COL],int row,int col)
 {
@@ -114,11 +115,12 @@ int Isfull(char board[ROW][COL],int row,int col)
 char Iswin(char board[ROW][COL],int row,int col)
 {
 int i=0;
+   //判断横三行的赢
  for(i=0;i<row;i++)
- {  //判断横三行的赢
+ {  
   if(board[i][0]==board[i][1]&&board[i][1]==board[i][2]&&board[i][1]!=' ')
    {
-    return board[i][1];
+     return board[i][1];
    }
  }
     //判断竖三列的赢
@@ -126,58 +128,57 @@ int i=0;
  {
    if(board[0][i]==board[1][i]&&board[1][i]==board[2][i]&&board[1][i]!=' ')
     {
-    return board[1][i];
+      return board[1][i];
     }
  }
     //判断两个对角线的赢
  if(board[0][0]==board[1][1]&&board[1][1]==board[2][2]&&board[1][1]!=' ')
-  return board[0][0];
+      return board[0][0];
  if(board[2][0]==board[1][1]&&board[1][1]==board[0][2]&&board[1][1]!=' ')
-   return board[2][0]; 
+      return board[2][0]; 
     //判断平局
  if(Isfull(board,ROW,COL)==1)
-   return 'Q';
+      return 'Q';
    //继续下
- return 'C';
+      return 'C';
 }
 
 void game()//创建游戏主体函数        
 {   
   char board[ROW][COL]={0};
-  char ret=0;//不能将Iswin直接赋在这
-            //因为还没开始下,根本就没有数据
+  char ret=0;//不能将Iswin直接赋在这,因为还没开始下,根本就没有数据
   Initboard(board,ROW,COL);
   printboard(board,ROW,COL);
   while(1)
   {
-  player_move(board,ROW,COL);
-  printboard(board,ROW,COL);
-  ret=Iswin(board,ROW,COL);//引用的是
-   if(ret!='C')         //下过子后的棋盘
+   player_move(board,ROW,COL);
+   printboard(board,ROW,COL);
+   ret=Iswin(board,ROW,COL);//引用的是下过子后的棋盘
+   if(ret!='C')         
    {
-    break;
+     break;
    }
-  computer_move(board,ROW,COL);
-  printboard(board,ROW,COL);
-  ret=Iswin(board,ROW,COL);
+   computer_move(board,ROW,COL);
+   printboard(board,ROW,COL);
+   ret=Iswin(board,ROW,COL);
    if(ret!='C')
     {
-     break;
+      break;
     }
    }
- if(ret=='*')//是判断相等,不是=赋值
-  printf("玩家 Win\n");
- else if(ret=='#')
-  printf("电脑 Win\n");
+  if(ret=='*')//是判断相等,不是=赋值
+    printf("玩家 Win\n");
+  else if(ret=='#')
+    printf("电脑 Win\n");
  else
-  printf("平局\n");
+    printf("平局\n");
 }       
                  
 int main()            
 {
 int input=0;
-srand((unsigned int)time(NULL));
- do      //只要设置一次随机数生成起点即可
+srand((unsigned int)time(NULL));//只要设置一次随机数生成起点即可
+ do      
  {
   menu();
   printf("请选择：>");
