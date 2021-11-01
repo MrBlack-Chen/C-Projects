@@ -6,6 +6,7 @@
 #define Tele_Max 11
 #define Company_Max 15
 #define Addr_Max 15
+
 //创建菜单函数
 void menu()
 {
@@ -15,6 +16,7 @@ void menu()
  printf("****5.显示    6.排序****\n");
  printf("*********0.退出*********\n");
 }
+
 //创建描述联系人信息的结构体变量
 struct infor
 {
