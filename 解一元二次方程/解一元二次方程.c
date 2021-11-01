@@ -19,7 +19,6 @@ int main()
      else
       printf("\n方程的解：x1=x2=%f",(-b)/2*a);
    }
-   
   else
    printf("\n方程的解：x1=%f  x2=%f",(-b+sqrt(d))/(2*a),(-b-sqrt(d))/(2*a));
  return 0;
